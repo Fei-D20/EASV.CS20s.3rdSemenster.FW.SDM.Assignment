@@ -8,9 +8,9 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
     public class ValuatorService : IValuatorService
     
     {
-        private readonly IRepositoryValuator _repo;
+        private readonly IValuatorRepository _repo;
 
-        public ValuatorService(IRepositoryValuator repositoryValuator)
+        public ValuatorService(IValuatorRepository repositoryValuator)
         {
             _repo = repositoryValuator;
         }

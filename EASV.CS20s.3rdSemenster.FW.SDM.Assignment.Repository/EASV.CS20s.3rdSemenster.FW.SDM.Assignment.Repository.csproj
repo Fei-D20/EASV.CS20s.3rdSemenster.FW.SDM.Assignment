@@ -10,8 +10,4 @@
       <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Repositories" />
-    </ItemGroup>
-
 </Project>

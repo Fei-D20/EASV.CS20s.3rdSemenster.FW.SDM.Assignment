@@ -10,4 +10,8 @@
       <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    </ItemGroup>
+
 </Project>

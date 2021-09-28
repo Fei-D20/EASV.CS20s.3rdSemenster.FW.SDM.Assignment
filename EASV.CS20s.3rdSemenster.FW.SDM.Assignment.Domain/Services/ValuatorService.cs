@@ -1,7 +1,28 @@
-﻿namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
+﻿using System.Collections.Generic;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
+
+namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
 {
-    public class ValuatorService
+    public class ValuatorService : IValuatorService
+    
     {
-        
+        private readonly IRepositoryValuator _repo;
+
+        public ValuatorService(IRepositoryValuator repositoryValuator)
+        {
+            _repo = repositoryValuator;
+        }
+
+        public List<Valuator> GetMostProductiveValuators()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Valuator> GetValuatorsByMovie(int movieId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

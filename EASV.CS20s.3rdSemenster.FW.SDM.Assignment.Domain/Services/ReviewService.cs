@@ -28,5 +28,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public int GetAverageRateFromReviewer(int valuatorId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

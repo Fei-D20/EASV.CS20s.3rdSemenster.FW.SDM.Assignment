@@ -15,5 +15,6 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService
         
         public int GetNumberOfReviews(int movieId);
 
+        int GetAverageRateFromReviewer(int valuatorId);
     }
 }

@@ -1,5 +1,6 @@
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +17,12 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
 
            
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var service = serviceProvider.GetRequiredService<IReviewService>();
-        }
+            var service = serviceProvider.GetService<ReviewApplicationContext>();
+            
+            
+                var ctx = service;
+                ctx.Database.EnsureDeleted();
+                ctx.Database.EnsureCreated();
+            }
     }
 }

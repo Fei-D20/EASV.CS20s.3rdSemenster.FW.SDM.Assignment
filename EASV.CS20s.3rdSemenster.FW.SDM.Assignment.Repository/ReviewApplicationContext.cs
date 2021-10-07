@@ -1,4 +1,4 @@
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository
@@ -9,9 +9,6 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository
         {
         }
 
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<Valuator> Valuators { get; set; }
-        
+        public DbSet<ReviewEntity> Reviews { get; set; }
     }
 }

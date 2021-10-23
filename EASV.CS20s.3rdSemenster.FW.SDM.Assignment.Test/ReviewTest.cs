@@ -1,38 +1,35 @@
 using System;
-using System.IO;
+using System.Collections.Generic;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository.Repositories;
+using Moq;
 using Xunit;
 
 namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
 {
-    public class UnitTest1
+    public class ReviewTest
     {
-        
+        Dictionary<int, IReviewRepository> dataStore;
+        Mock<IReviewRepository> _mock;
+
+        public ReviewTest()
+        {
+            dataStore = new Dictionary<int, IReviewRepository>();
+
+            _mock = new Mock<IReviewRepository>();
+
+        }
         /// <summary>
         /// 1. Test get the amount of reviews from the reviewer id
-        ///     the reviewer should exist
-        /// 
         /// </summary>
+
         [Fact]
         public void GetNumberOfReviewsFromReviewerTest()
         {
-            IReviewService reviewService = new ReviewService();
-            // min valid data as 1
-            Assert.Equal(547,reviewService.GetNumberOfReviewsFromReviewer(1));
-            
-            // max valid data as 999
-            Assert.Equal(1155,reviewService.GetNumberOfReviewsFromReviewer(999));
-            
-            // test the invalid 0
-            var ex = Assert.Throws<InvalidOperationException>(() => reviewService.GetNumberOfReviewsFromReviewer(0));
-            Assert.Equal("the reviewer is not exist!! ", ex.Message);
-            
-
-
+            //range
+            // _mock.SetupGet(x => x.ReadByReviewer(It.IsAny<int>()))
+            //     .Returns<int>(reviews => dataStore.ContainsKey(reviews) ? dataStore[reviews] : null);
         }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(0)]
         public void GetAverageRateFromReviewerTest(int valuatorId)
         {
-            IReviewService reviewService = new ReviewService();
+            IReviewService reviewService = new ReviewService(_mock.Object);
 
             var actual = reviewService.GetAverageRateFromReviewer(valuatorId);
             var expected = 10;

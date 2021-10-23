@@ -68,5 +68,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Repository.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public int ReadByReviewer(int reviewerId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

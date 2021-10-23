@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>EASV.CS20s._3rdSemenster.FW.SDM.Assignment.JsonRead</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Core\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Core.csproj" />
+      <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+</Project>

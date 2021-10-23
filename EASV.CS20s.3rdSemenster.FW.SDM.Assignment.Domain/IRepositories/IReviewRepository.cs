@@ -11,5 +11,6 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories
         public Review ReadById(int id);
         public Review Delete(int id);
         public Review Update(Review review);
+        public int ReadByReviewer(int reviewerId);
     }
 }

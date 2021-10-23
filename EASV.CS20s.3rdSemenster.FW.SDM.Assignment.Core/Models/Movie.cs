@@ -6,5 +6,6 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models
     {
         public int MovieId { get; set; }
         public List<Review> MovieReviews { get; set; }
+        
     }
 }

@@ -9,5 +9,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models
         public DateTime ReviewDate { get; set; }
         public Movie Movie { get; set; }
         public Valuator Valuator { get; set; }
+        
+        
     }
 }

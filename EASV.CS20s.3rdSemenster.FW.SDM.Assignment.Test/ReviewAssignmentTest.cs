@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
@@ -8,18 +7,19 @@ using Xunit;
 
 namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
 {
-    public class ReviewTest
+    public class ReviewAssignmentTest
     {
-        Dictionary<int, IReviewRepository> dataStore;
-        Mock<IReviewRepository> _mock;
+        private readonly Mock<IReviewRepository> _mock;
+        private readonly ReviewService _reviewService;
 
-        public ReviewTest()
+        public ReviewAssignmentTest()
         {
-            dataStore = new Dictionary<int, IReviewRepository>();
-
             _mock = new Mock<IReviewRepository>();
+            _reviewService = new ReviewService(_mock.Object);
 
+            _mock.SetupAllProperties();
         }
+
         /// <summary>
         /// 1. Test get the amount of reviews from the reviewer id
         /// </summary>
@@ -27,9 +27,9 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [Fact]
         public void GetNumberOfReviewsFromReviewerTest()
         {
-            //range
-            // _mock.SetupGet(x => x.ReadByReviewer(It.IsAny<int>()))
-            //     .Returns<int>(reviews => dataStore.ContainsKey(reviews) ? dataStore[reviews] : null);
+            
+            Assert.True(_reviewService is IReviewService);
+            Assert.NotNull(_mock.Object);
         }
 
         /// <summary>
@@ -41,12 +41,6 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(0)]
         public void GetAverageRateFromReviewerTest(int valuatorId)
         {
-            IReviewService reviewService = new ReviewService(_mock.Object);
-
-            var actual = reviewService.GetAverageRateFromReviewer(valuatorId);
-            var expected = 10;
-            
-            Assert.Equal(expected,actual);
         }
         
         /// <summary>

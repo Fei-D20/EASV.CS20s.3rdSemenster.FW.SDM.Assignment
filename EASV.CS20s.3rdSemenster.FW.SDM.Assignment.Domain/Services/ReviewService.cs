@@ -1,44 +1,35 @@
-﻿using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
 {
-    public class ReviewService : IReviewService
+    public class ReviewService:IReviewService
     {
-        private IReviewRepository _reviewRepository;
+        private readonly IReviewRepository _reviewRepository;
+
         public ReviewService(IReviewRepository reviewRepository)
         {
+            if (reviewRepository == null)
+            {
+                throw new InvalidDataException("the review repository should not be null");
+            }
             _reviewRepository = reviewRepository;
         }
-        public double GetAverageRateOfMovie(int movieId)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public int GetNumberOfRates(int movieId, int grade)
+        public List<Review> GetAll()
         {
-            throw new System.NotImplementedException();
-        }
+            var findAll = _reviewRepository.FindAll();
+            if (findAll == null)
+            {
+                throw new InvalidDataException("The Repository doesn't have any data!");
+            }
 
-        public int GetNumberOfReviewsFromReviewer(int valuatorId)
-        {
-            throw new System.NotImplementedException();
+            return findAll;
         }
-
-        public int GetNumberOfRatesByReviewer(int reviewerId, int grade)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int GetNumberOfReviews(int movieId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int GetAverageRateFromReviewer(int valuatorId)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

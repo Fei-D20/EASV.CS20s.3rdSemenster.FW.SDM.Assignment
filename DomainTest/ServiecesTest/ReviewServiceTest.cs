@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
@@ -13,11 +14,13 @@ namespace DomainTest.ServiecesTest
     {
         private readonly List<Review> _repository;
         private readonly Mock<IReviewRepository> _mock;
+        private readonly ReviewService _reviewService;
 
         public ReviewServiceTest()
         {
             _repository = new List<Review>();
             _mock = new Mock<IReviewRepository>();
+            _reviewService = new ReviewService(_mock.Object);
         }
 
         [Fact]
@@ -36,12 +39,33 @@ namespace DomainTest.ServiecesTest
         }
 
         [Fact]
-        public void ReviewService_CallReviewRepositoryGetAll_ReturnNull_Test()
+        public void ReviewService_CallReviewRepositoryGetAll_OnlyOnce_Test()
         {
-            var mock = new Mock<IReviewRepository>();
-            var reviewService = new ReviewService(mock.Object);
-            var invalidDataException = Assert.Throws<InvalidDataException>(() => reviewService.GetAll());
-            Assert.Equal("The Repository doesn't have any data!", invalidDataException.Message);
+            _reviewService.GetAll();
+            _mock.Verify(r=>r.FindAll(),Times.Once());
+        }
+
+        [Fact]
+        public void ReviewService_CallReviewRepositoryGetAll_ReturnListOfReview()
+        {
+            var reviews = _reviewService.GetAll();
+            var random = new Random();
+            var next = random.Next(0,100);
+            
+            for (int i = 0; i < 10; i++)
+            {
+                _repository.Add(new Review()
+                {
+                    Grade = next,
+                    Movie = next,
+                    Reviewer = next
+                });
+            }
+
+            _mock.Setup(r => r.FindAll()).Returns(_repository);
+            
+            Assert.Equal(_repository,_reviewService.GetAll());
+
         }
     }
 }

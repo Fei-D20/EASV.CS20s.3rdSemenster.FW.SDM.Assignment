@@ -9,21 +9,27 @@ namespace CoreTest.IServiceTest
 {
     public class IServieceTest
     {
+        private readonly Mock<IReviewService> _mock;
+
+        public IServieceTest()
+        {
+            _mock = new Mock<IReviewService>();
+
+        }
+
         [Fact]
         public void IService_IsAvailable_Test()
         {
-            var mock = new Mock<IReviewService>();
-            Assert.NotNull(mock.Object);
+            Assert.NotNull(_mock.Object);
         }
 
         [Fact]
         public void IService_GetAll_WithOutParam_ReturnListOfReview()
         {
-            var mock = new Mock<IReviewService>();
-            mock.Setup(o => o.GetAll())
+            _mock.Setup(o => o.GetAll())
                 .Returns(new List<Review>());
 
-            var reviewService = mock.Object;
+            var reviewService = _mock.Object;
             var reviews = new List<Review>();
             Assert.Equal(reviews,reviewService.GetAll());
         }

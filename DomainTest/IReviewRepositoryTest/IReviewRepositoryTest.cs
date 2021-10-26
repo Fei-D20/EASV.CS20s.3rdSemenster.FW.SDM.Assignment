@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure;
 using Xunit;
 
 namespace DomainTest.IReviewRepositoryTest
@@ -26,14 +25,6 @@ namespace DomainTest.IReviewRepositoryTest
         public void ReviewRepository_FindAll_Test()
         {
             
-        }
-    }
-
-    public class ReviewRepository:IReviewRepository
-    {
-        public List<Review> FindAll()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

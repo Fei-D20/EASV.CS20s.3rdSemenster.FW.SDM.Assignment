@@ -22,13 +22,8 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
 
         public List<Review> GetAll()
         {
-            var findAll = _reviewRepository.FindAll();
-            if (findAll == null)
-            {
-                throw new InvalidDataException("The Repository doesn't have any data!");
-            }
-
-            return findAll;
+            
+            return _reviewRepository.FindAll();
         }
         
     }

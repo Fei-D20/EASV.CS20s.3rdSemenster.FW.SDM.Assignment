@@ -19,57 +19,22 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure
             return _repo;
         }
 
-        public int GetNumberOfReviewsFromReviewer(int reviewer)
+        public Review Create()
         {
             throw new NotImplementedException();
         }
 
-        public double GetAverageRateGetAverageRateFromReviewer(int reviewer)
+        public Review Read()
         {
             throw new NotImplementedException();
         }
 
-        public int GetNumberOfRatesByReviewer(int reviewer)
+        public Review Update()
         {
             throw new NotImplementedException();
         }
 
-        public int GetNumberOfReviews(int review)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double GetAverageRateOfMovie(int movie)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double GetNubmerOfRates(int movie)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int[] GetMoviesWithHighestNumberOfTopRates()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int[] GetMostProductiveReviewers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetTopRatedMovies(double grade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int[] GetTopMoviesByReviewer(int reviewer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int[] GetReviewersByMovie(int movie)
+        public Review Delete()
         {
             throw new NotImplementedException();
         }

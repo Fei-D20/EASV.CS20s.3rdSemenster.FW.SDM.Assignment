@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
 using Moq;
 using Xunit;
 

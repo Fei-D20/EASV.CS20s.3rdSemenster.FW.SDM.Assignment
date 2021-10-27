@@ -1,20 +1,16 @@
-using System.Collections.Generic;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using Moq;
 using Xunit;
 
 namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
 {
-    public class ReviewAssignmentTest
+    public class ReviewIServiceAssignmentTest
     {
-        private readonly Mock<IReviewRepository> _mock;
+        private readonly Mock<IReviewService> _mock;
             
-        public ReviewAssignmentTest()
+        public ReviewIServiceAssignmentTest()
         {
-            _mock = new Mock<IReviewRepository>();
+            _mock = new Mock<IReviewService>();
 
         }
 

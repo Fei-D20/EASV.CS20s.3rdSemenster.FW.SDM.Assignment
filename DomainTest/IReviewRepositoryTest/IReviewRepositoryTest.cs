@@ -1,30 +1,29 @@
+using System.Collections.Generic;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure;
+using Moq;
 using Xunit;
 
 namespace DomainTest.IReviewRepositoryTest
 {
     public class IReviewRepositoryTest
     {
-        private readonly ReviewRepository _reviewRepository;
-
-        public IReviewRepositoryTest()
-        {
-            _reviewRepository = new ReviewRepository();
-        }
-
         [Fact]
         public void ReviewRepositoryIsAvailable()
         {
-            
-            Assert.NotNull(_reviewRepository);
-            Assert.True(_reviewRepository is IReviewRepository);
+            var mock = new Mock<IReviewRepository>();
+            Assert.NotNull(mock.Object );
         }
 
         [Fact]
-        public void ReviewRepository_FindAll_Test()
+        public void ReviewRepository_FindAll_WithOutParam_ReturnList()
         {
+            var mock = new Mock<IReviewRepository>();
+            mock.Setup(r => r.FindAll()).Returns(new List<Review>());
             
+            Assert.Equal(new List<Review>(),mock.Object.FindAll());
+
         }
     }
 }

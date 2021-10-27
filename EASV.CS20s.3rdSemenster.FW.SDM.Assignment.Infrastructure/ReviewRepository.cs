@@ -9,28 +9,69 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure
     {
         private readonly List<Review> _repo;
 
-        public ReviewRepository()
+        public ReviewRepository(List<Review> repo)
         {
-            var random = new Random();
-            var grade = random.Next(0,5);
-            var movie = random.Next(0,9);
-            var reviewer = random.Next(0,9);
-            _repo = new List<Review>();
-            for (int i = 0; i < 5; i++)
-            {
-                _repo.Add(new Review()
-                {
-                    Grade = grade,
-                    Movie = int.Parse("00"+movie),
-                    Reviewer = int.Parse("10"+reviewer)
-                });
-            }
-            
+            _repo = repo;
         }
 
         public List<Review> FindAll()
         {
-            return null;
+            return _repo;
+        }
+
+        public int GetNumberOfReviewsFromReviewer(int reviewer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetAverageRateGetAverageRateFromReviewer(int reviewer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetNumberOfRatesByReviewer(int reviewer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetNumberOfReviews(int review)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetAverageRateOfMovie(int movie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetNubmerOfRates(int movie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int[] GetMoviesWithHighestNumberOfTopRates()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int[] GetMostProductiveReviewers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetTopRatedMovies(double grade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int[] GetTopMoviesByReviewer(int reviewer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int[] GetReviewersByMovie(int movie)
+        {
+            throw new NotImplementedException();
         }
     }
 }

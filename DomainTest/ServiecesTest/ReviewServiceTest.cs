@@ -48,7 +48,6 @@ namespace DomainTest.ServiecesTest
         [Fact]
         public void ReviewService_CallReviewRepositoryGetAll_ReturnListOfReview()
         {
-            var reviews = _reviewService.GetAll();
             var random = new Random();
             var next = random.Next(0,100);
             
@@ -63,8 +62,9 @@ namespace DomainTest.ServiecesTest
             }
 
             _mock.Setup(r => r.FindAll()).Returns(_repository);
+            var reviews = _reviewService.GetAll();
             
-            Assert.Equal(_repository,_reviewService.GetAll());
+            Assert.Equal(_repository,reviews);
 
         }
     }

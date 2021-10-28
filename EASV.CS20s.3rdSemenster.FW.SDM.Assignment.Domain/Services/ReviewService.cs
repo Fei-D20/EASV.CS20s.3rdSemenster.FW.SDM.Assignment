@@ -28,12 +28,30 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
-            throw new NotImplementedException();
+            var findReviewsByReviewer = _reviewRepository.FindReviewsByReviewer(reviewer);
+            var count = findReviewsByReviewer.Count;
+            return count;
         }
 
-        public double GetAverageRateGetAverageRateFromReviewer(int reviewer)
+        public double? GetAverageRateFromReviewer(int reviewer)
         {
-            throw new NotImplementedException();
+            var findReviewsByReviewer = _reviewRepository.FindReviewsByReviewer(reviewer);
+            if (findReviewsByReviewer == null)
+            {
+                return null;
+            }
+            
+            double count = 0;
+            double totle = 0;
+
+            foreach (var review in findReviewsByReviewer)
+            {
+                count++;
+                totle = totle + review.Grade;
+            }
+
+            double rate = totle/count;
+            return rate;
         }
 
         public int GetNumberOfRatesByReviewer(int reviewer)

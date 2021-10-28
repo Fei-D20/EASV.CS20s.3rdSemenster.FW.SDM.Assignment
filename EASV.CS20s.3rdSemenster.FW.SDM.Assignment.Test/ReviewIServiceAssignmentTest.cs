@@ -38,10 +38,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(0,0.83)]
         public void GetAverageRateFromReviewerTest(int Reviewer,double average)
         {
-            _mock.Setup(o => o.GetAverageRateGetAverageRateFromReviewer(Reviewer))
+            _mock.Setup(o => o.GetAverageRateFromReviewer(Reviewer))
                 .Returns(average);
             
-            Assert.Equal(average,_mock.Object.GetAverageRateGetAverageRateFromReviewer(Reviewer));
+            Assert.Equal(average,_mock.Object.GetAverageRateFromReviewer(Reviewer));
         }
         
         /// <summary>

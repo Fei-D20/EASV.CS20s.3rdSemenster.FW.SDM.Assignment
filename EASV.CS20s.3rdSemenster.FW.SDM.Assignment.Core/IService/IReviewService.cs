@@ -7,7 +7,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService
     {
         List<Review> GetAll();
         int GetNumberOfReviewsFromReviewer(int reviewer);
-        double GetAverageRateGetAverageRateFromReviewer(int reviewer);
+        double? GetAverageRateFromReviewer(int reviewer);
         int GetNumberOfRatesByReviewer(int reviewer);
         int GetNumberOfReviews(int review);
         double GetAverageRateOfMovie(int movie);

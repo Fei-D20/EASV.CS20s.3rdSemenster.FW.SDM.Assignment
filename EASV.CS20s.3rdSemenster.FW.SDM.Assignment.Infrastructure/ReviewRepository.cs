@@ -38,5 +38,11 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure
         {
             throw new NotImplementedException();
         }
+
+        public List<Review> FindReviewsByReviewer(int reviewer)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

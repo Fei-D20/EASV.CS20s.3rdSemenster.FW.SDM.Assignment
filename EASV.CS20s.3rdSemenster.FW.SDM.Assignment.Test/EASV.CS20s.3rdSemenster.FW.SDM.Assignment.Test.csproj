@@ -24,6 +24,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Core\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Core.csproj" />
+      <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Domain.csproj" />
+      <ProjectReference Include="..\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Infrastructure\EASV.CS20s.3rdSemenster.FW.SDM.Assignment.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

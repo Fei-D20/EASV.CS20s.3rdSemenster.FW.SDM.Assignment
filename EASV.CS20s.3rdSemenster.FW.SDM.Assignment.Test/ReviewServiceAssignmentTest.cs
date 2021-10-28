@@ -47,6 +47,18 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
                 Grade = 4,Id = 5,Movie = 2,Reviewer = 3
             });
             
+            _reviewList.Add(new Review()
+            {
+                Grade = 4,Id = 6,Movie = 2,Reviewer = 3
+            });
+            _reviewList.Add(new Review()
+            {
+                Grade = 4,Id = 7,Movie = 2,Reviewer = 2
+            });
+            _reviewList.Add(new Review()
+            {
+                Grade = 4,Id = 8,Movie = 2,Reviewer = 3
+            });
             _mockReviewRepository = new Mock<IReviewRepository>();
             _reviewService = new ReviewService(_mockReviewRepository.Object);
 
@@ -71,7 +83,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// </summary>
         [Theory]
         [InlineData(1,3)]
-        [InlineData(2,2)]
+        [InlineData(2,3)]
         [InlineData(3,4)]
         public void GetAverageRateFromReviewerTest(int reviewer,double average)
         {
@@ -87,7 +99,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// </summary>
         [Theory]
         [InlineData(1,3)]
-        [InlineData(2,1)]
+        [InlineData(2,2)]
         public void GetNumberOfRatesByReviewerTest(int reviewer,int expect)
         {
             _mockReviewRepository.Setup(o => o.FindReviewsByReviewer(reviewer))
@@ -100,7 +112,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// </summary>
         [Theory]
         [InlineData(1,2)]
-        [InlineData(2,2)]
+        [InlineData(2,5)]
         [InlineData(3,1)]
         public void GetNumberOfReviewsTest(int movie,int expected)
         {
@@ -114,7 +126,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// </summary>
         [Theory]
         [InlineData(1,1.5)]
-        [InlineData(2,4.5)]
+        [InlineData(2,4.2)]
         [InlineData(3,3)]
         public void GetAverageRateOfMovieTest(int movie, double expected)
         {
@@ -127,13 +139,13 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// 6. Test how many time the movie get the same grade
         /// </summary>
         [Theory]
-        [InlineData(003,1.2, 0)]
-        [InlineData(004,2.3, 0)]
+        [InlineData(1,1, 1)]
+        [InlineData(2,4, 4)]
         public void GetNumberOfRatesTest(int movie, double rate, int expect)
         {
             _mockReviewRepository.Setup(o => o.FindReviewsByMovie(movie))
                 .Returns(_reviewList.FindAll(r => r.Movie == movie));
-            Assert.Equal(expect, _reviewService.GetNubmerOfRates(movie,rate));
+            Assert.Equal(expect, _reviewService.GetNumberOfRates(movie,rate));
 
         }
         
@@ -143,7 +155,8 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [Fact]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
-
+            var moviesWithHighestNumberOfTopRates = _reviewService.GetMoviesWithHighestNumberOfTopRates();
+            
         }
         
         /// <summary>

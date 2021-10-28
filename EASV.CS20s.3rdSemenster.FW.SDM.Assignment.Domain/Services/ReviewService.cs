@@ -85,9 +85,19 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
             return totle / count;
         }
 
-        public double GetNubmerOfRates(int movie, double rate)
+        public double GetNumberOfRates(int movie, double rate)
         {
-            throw new NotImplementedException();
+            var findReviewsByMovie = _reviewRepository.FindReviewsByMovie(movie);
+            int count = 0;
+            foreach (var review in findReviewsByMovie)
+            {
+                if (review.Grade == rate)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         public int[] GetMoviesWithHighestNumberOfTopRates()

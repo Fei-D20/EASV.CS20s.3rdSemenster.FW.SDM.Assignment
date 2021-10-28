@@ -11,7 +11,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService
         int GetNumberOfRatesByReviewer(int reviewer);
         int GetNumberOfReviews(int movie);
         double? GetAverageRateOfMovie(int movie);
-        double GetNubmerOfRates(int movie, double rate);
+        double GetNumberOfRates(int movie, double rate);
         int[] GetMoviesWithHighestNumberOfTopRates();
         int[] GetMostProductiveReviewers();
         int GetTopRatedMovies(double grade);

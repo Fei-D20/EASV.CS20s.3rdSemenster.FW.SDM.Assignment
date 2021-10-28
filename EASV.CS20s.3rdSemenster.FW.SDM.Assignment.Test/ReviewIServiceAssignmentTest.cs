@@ -88,8 +88,8 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(004,2.3, 1)]
         public void GetNumberOfRatesTest(int movie, double rate, int number)
         {
-            _mock.Setup(o => o.GetNubmerOfRates(movie,rate)).Returns(number);
-            Assert.Equal(number,_mock.Object.GetNubmerOfRates(movie,rate));
+            _mock.Setup(o => o.GetNumberOfRates(movie,rate)).Returns(number);
+            Assert.Equal(number,_mock.Object.GetNumberOfRates(movie,rate));
             
         }
         

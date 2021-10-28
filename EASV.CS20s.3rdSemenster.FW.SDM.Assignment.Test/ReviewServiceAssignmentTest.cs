@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
@@ -14,39 +15,40 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
     {
         
         private readonly IReviewService _reviewService;
-        private readonly List<Review> _reviews;
-        private readonly Mock<IReviewRepository> _mock;
+        private readonly List<Review> _reviewList;
+        private readonly Mock<IReviewRepository> _mockReviewRepository;
 
         public ReviewServiceAssignmentTest()
         {
-            _reviews = new List<Review>();
+            _reviewList = new List<Review>();
             
-            _reviews.Add(new Review()
+            _reviewList.Add(new Review()
             {
                 Grade = 1,Id = 1,Movie = 1,Reviewer = 1
             });
             
-            _reviews.Add(new Review()
+            _reviewList.Add(new Review()
             {
-                Grade = 5,Id = 1,Movie = 1,Reviewer = 1
+                Grade = 5,Id = 2,Movie = 2,Reviewer = 1
             });
             
-            _reviews.Add(new Review()
+            _reviewList.Add(new Review()
             {
-                Grade = 3,Id = 1,Movie = 1,Reviewer = 1
+                Grade = 3,Id = 3,Movie = 3,Reviewer = 1
             });
             
-            _reviews.Add(new Review()
+            _reviewList.Add(new Review()
             {
-                Grade = 1,Id = 2,Movie = 1,Reviewer = 1
+                Grade = 2,Id = 4,Movie = 1,Reviewer = 2
             });
             
-            _reviews.Add(new Review()
+            _reviewList.Add(new Review()
             {
-                Grade = 1,Id = 2,Movie = 1,Reviewer = 1
+                Grade = 4,Id = 5,Movie = 2,Reviewer = 3
             });
-            _mock = new Mock<IReviewRepository>();
-            _reviewService = new ReviewService(_mock.Object);
+            
+            _mockReviewRepository = new Mock<IReviewRepository>();
+            _reviewService = new ReviewService(_mockReviewRepository.Object);
 
         }
 
@@ -59,8 +61,8 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(02)]
         public void GetNumberOfReviewsFromReviewerTest(int reviewer)
         {
-            _mock.Setup(o => o.FindReviewsByReviewer(reviewer)).Returns(_reviews);
-            Assert.Equal(_reviews.Count, _reviewService.GetNumberOfReviewsFromReviewer(reviewer));
+            _mockReviewRepository.Setup(o => o.FindReviewsByReviewer(reviewer)).Returns(_reviewList);
+            Assert.Equal(_reviewList.Count, _reviewService.GetNumberOfReviewsFromReviewer(reviewer));
         }
 
         /// <summary>
@@ -68,10 +70,15 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// 
         /// </summary>
         [Theory]
-        [InlineData(1,2.2)]
+        [InlineData(1,3)]
+        [InlineData(2,2)]
+        [InlineData(3,4)]
         public void GetAverageRateFromReviewerTest(int reviewer,double average)
         {
-            _mock.Setup(o => o.FindReviewsByReviewer(reviewer)).Returns(_reviews);
+            var findAll = _reviewList.FindAll(r => r.Reviewer == reviewer);
+            _mockReviewRepository.Setup(o => o.FindReviewsByReviewer(reviewer))
+                .Returns(findAll);
+            
             Assert.Equal(average,_reviewService.GetAverageRateFromReviewer(reviewer));
         }
         
@@ -79,43 +86,55 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// 3. Test how many times the reviewer give the same grade
         /// </summary>
         [Theory]
-        [InlineData(003,12)]
-        [InlineData(004,23)]
-        public void GetNumberOfRatesByReviewerTest(int reviewer,int number)
+        [InlineData(1,3)]
+        [InlineData(2,1)]
+        public void GetNumberOfRatesByReviewerTest(int reviewer,int expect)
         {
+            _mockReviewRepository.Setup(o => o.FindReviewsByReviewer(reviewer))
+                .Returns(_reviewList.FindAll(r => r.Reviewer == reviewer));
+            Assert.Equal(expect,_reviewService.GetNumberOfRatesByReviewer(reviewer));
         }
         
         /// <summary>
         /// 4. Test how many reviews for the same movie 
         /// </summary>
         [Theory]
-        [InlineData(003,12)]
-        [InlineData(004,23)]
-        public void GetNumberOfReviewsTest(int review,int number)
+        [InlineData(1,2)]
+        [InlineData(2,2)]
+        [InlineData(3,1)]
+        public void GetNumberOfReviewsTest(int movie,int expected)
         {
-            
+            _mockReviewRepository.Setup(o => o.FindReviewsByMovie(movie))
+                .Returns(_reviewList.FindAll(r => r.Movie == movie));
+            Assert.Equal(expected,_reviewService.GetNumberOfReviews(movie));
         }
         
         /// <summary>
         /// 5. Test the average grade of the movie
         /// </summary>
         [Theory]
-        [InlineData(003,1.2)]
-        [InlineData(004,2.3)]
-        public void GetAverageRateOfMovieTest(int movie, double rate)
+        [InlineData(1,1.5)]
+        [InlineData(2,4.5)]
+        [InlineData(3,3)]
+        public void GetAverageRateOfMovieTest(int movie, double expected)
         {
+            _mockReviewRepository.Setup(o => o.FindReviewsByMovie(movie))
+                .Returns(_reviewList.FindAll(r => r.Movie == movie));
+            Assert.Equal(expected, _reviewService.GetAverageRateOfMovie(movie));
         }
         
         /// <summary>
         /// 6. Test how many time the movie get the same grade
         /// </summary>
         [Theory]
-        [InlineData(003,1.2)]
-        [InlineData(004,2.3)]
-        public void GetNumberOfRatesTest(int movie, double rate)
+        [InlineData(003,1.2, 0)]
+        [InlineData(004,2.3, 0)]
+        public void GetNumberOfRatesTest(int movie, double rate, int expect)
         {
-            
-            
+            _mockReviewRepository.Setup(o => o.FindReviewsByMovie(movie))
+                .Returns(_reviewList.FindAll(r => r.Movie == movie));
+            Assert.Equal(expect, _reviewService.GetNubmerOfRates(movie,rate));
+
         }
         
         /// <summary>

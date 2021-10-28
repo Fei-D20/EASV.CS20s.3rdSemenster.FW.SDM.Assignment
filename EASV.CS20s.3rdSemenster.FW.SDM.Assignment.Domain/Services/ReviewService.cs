@@ -56,20 +56,36 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
 
         public int GetNumberOfRatesByReviewer(int reviewer)
         {
-            throw new NotImplementedException();
+            var findReviewsByReviewer = _reviewRepository.FindReviewsByReviewer(reviewer);
+            return findReviewsByReviewer.Count;
         }
 
-        public int GetNumberOfReviews(int review)
+        public int GetNumberOfReviews(int movie)
         {
-            throw new NotImplementedException();
+            var findReviewsByMovie = _reviewRepository.FindReviewsByMovie(movie);
+            return findReviewsByMovie.Count;
         }
 
-        public double GetAverageRateOfMovie(int movie)
+        public double? GetAverageRateOfMovie(int movie)
         {
-            throw new NotImplementedException();
+            var findReviewsByMovie = _reviewRepository.FindReviewsByMovie(movie);
+            
+            if (findReviewsByMovie == null)
+                return null;
+            
+            double count = 0;
+            double totle = 0;
+            
+            foreach (var review in findReviewsByMovie)
+            {
+                count++;
+                totle += review.Grade;
+            }
+
+            return totle / count;
         }
 
-        public double GetNubmerOfRates(int movie)
+        public double GetNubmerOfRates(int movie, double rate)
         {
             throw new NotImplementedException();
         }

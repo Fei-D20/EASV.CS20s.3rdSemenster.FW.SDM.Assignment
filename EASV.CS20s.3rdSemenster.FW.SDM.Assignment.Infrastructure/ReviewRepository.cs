@@ -43,6 +43,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure
         {
             throw new NotImplementedException();
         }
-        
+
+        public List<Review> FindReviewsByMovie(int movie)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

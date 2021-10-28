@@ -62,10 +62,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [Theory]
         [InlineData(003,12)]
         [InlineData(004,23)]
-        public void GetNumberOfReviewsTest(int review,int number)
+        public void GetNumberOfReviewsTest(int movie,int number)
         {
-            _mock.Setup(o => o.GetNumberOfReviews(review)).Returns(number);
-            Assert.Equal(number,_mock.Object.GetNumberOfReviews(review));
+            _mock.Setup(o => o.GetNumberOfReviews(movie)).Returns(number);
+            Assert.Equal(number,_mock.Object.GetNumberOfReviews(movie));
         }
         
         /// <summary>
@@ -84,12 +84,12 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// 6. Test how many time the movie get the same grade
         /// </summary>
         [Theory]
-        [InlineData(003,1.2)]
-        [InlineData(004,2.3)]
-        public void GetNumberOfRatesTest(int movie, double rate)
+        [InlineData(003,1.2, 0)]
+        [InlineData(004,2.3, 1)]
+        public void GetNumberOfRatesTest(int movie, double rate, int number)
         {
-            _mock.Setup(o => o.GetNubmerOfRates(movie)).Returns(rate);
-            Assert.Equal(rate,_mock.Object.GetNubmerOfRates(movie));
+            _mock.Setup(o => o.GetNubmerOfRates(movie,rate)).Returns(number);
+            Assert.Equal(number,_mock.Object.GetNubmerOfRates(movie,rate));
             
         }
         

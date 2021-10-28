@@ -12,10 +12,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService
         int GetNumberOfReviews(int movie);
         double? GetAverageRateOfMovie(int movie);
         double GetNumberOfRates(int movie, double rate);
-        int[] GetMoviesWithHighestNumberOfTopRates();
-        int[] GetMostProductiveReviewers();
-        int GetTopRatedMovies(double grade);
-        int[] GetTopMoviesByReviewer(int reviewer);
-        int[] GetReviewersByMovie(int movie);
+        List<int> GetMoviesWithHighestNumberOfTopRates(double rate);
+        List<int> GetMostProductiveReviewers();
+        List<int> GetTopRatedMovies(int amount);
+        List<int> GetTopMoviesByReviewer(int reviewer);
+        List<int> GetReviewersByMovie(int movie);
     }
 }

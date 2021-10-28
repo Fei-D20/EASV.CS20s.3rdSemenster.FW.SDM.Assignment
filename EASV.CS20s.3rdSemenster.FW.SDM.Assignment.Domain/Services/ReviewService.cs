@@ -38,7 +38,7 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
             var findReviewsByReviewer = _reviewRepository.FindReviewsByReviewer(reviewer);
             if (findReviewsByReviewer == null)
             {
-                return null;
+                throw new Exception("there is no review... ");
             }
             
             double count = 0;
@@ -100,29 +100,45 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services
             return count;
         }
 
-        public int[] GetMoviesWithHighestNumberOfTopRates()
+        public List<int> GetMoviesWithHighestNumberOfTopRates(double rate)
         {
-            throw new NotImplementedException();
+            var findReviewsByRate = _reviewRepository.FindReviewsByRate(rate);
+            var ints = new List<int>(); 
+            
+            foreach (var review in findReviewsByRate)
+            {
+                if (review.Grade == rate)
+                {
+                    ints.Add(review.Grade);
+                }
+            }
+
+            return ints;
+
         }
 
-        public int[] GetMostProductiveReviewers()
+        public List<int> GetMostProductiveReviewers()
         {
-            throw new NotImplementedException();
+            var reviewer = _reviewRepository.FindMostProductiveReviewers();
+            return reviewer;
         }
 
-        public int GetTopRatedMovies(double grade)
+        public List<int> GetTopRatedMovies(int amount)
         {
-            throw new NotImplementedException();
+            var topRatedMovies = _reviewRepository.GetTopRatedMovies(amount);
+            return topRatedMovies;
         }
 
-        public int[] GetTopMoviesByReviewer(int reviewer)
+        public List<int> GetTopMoviesByReviewer(int reviewer)
         {
-            throw new NotImplementedException();
+            var topMoviesByReviewer = _reviewRepository.GetTopMoviesByReviewer(reviewer);
+            return topMoviesByReviewer;
         }
 
-        public int[] GetReviewersByMovie(int movie)
+        public List<int> GetReviewersByMovie(int movie)
         {
-            throw new NotImplementedException();
+            var reviewerByMovie = _reviewRepository.GetReviewerByMovie(movie);
+            return reviewerByMovie;
         }
     }
 }

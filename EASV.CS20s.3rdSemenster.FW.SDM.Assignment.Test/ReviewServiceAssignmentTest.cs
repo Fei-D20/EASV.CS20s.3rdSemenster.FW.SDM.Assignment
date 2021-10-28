@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.IRepositories;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Domain.Services;
-using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Infrastructure;
 using Moq;
+using SQLitePCL;
 using Xunit;
 
 namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
@@ -90,8 +91,16 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
             var findAll = _reviewList.FindAll(r => r.Reviewer == reviewer);
             _mockReviewRepository.Setup(o => o.FindReviewsByReviewer(reviewer))
                 .Returns(findAll);
-            
             Assert.Equal(average,_reviewService.GetAverageRateFromReviewer(reviewer));
+        }
+        
+        
+        [Theory]
+        [InlineData(9,5)]
+        public void GetAverageRateFromReviewerExceptionTest(int reviewer, double average)
+        {
+            var exception = Assert.Throws<Exception>( () => _reviewService.GetAverageRateFromReviewer(reviewer));
+            Assert.Equal("there is no review... ", exception.Message);
         }
         
         /// <summary>
@@ -152,11 +161,25 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// <summary>
         /// 7. Test the top grade movies
         /// </summary>
-        [Fact]
-        public void GetMoviesWithHighestNumberOfTopRatesTest()
+        [Theory]
+        [InlineData(5)]
+        public void GetMoviesWithHighestNumberOfTopRatesTest(int topGrade)
         {
-            var moviesWithHighestNumberOfTopRates = _reviewService.GetMoviesWithHighestNumberOfTopRates();
+            var findAll = _reviewList.FindAll(r => r.Grade == topGrade);
+
+            var ints = new List<int>();
+            foreach (var review in findAll)
+            {
+                ints.Add(review.Movie);
+            }
+
             
+            _mockReviewRepository.Setup(o => o.FindReviewsByRate(topGrade))
+                .Returns(_reviewList.FindAll(r => r.Grade == topGrade));
+            
+            var moviesWithHighestNumberOfTopRates = _reviewService.GetMoviesWithHighestNumberOfTopRates(topGrade);
+            
+            Assert.Equal(ints.Count, moviesWithHighestNumberOfTopRates.Count);
         }
         
         /// <summary>
@@ -165,19 +188,30 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [Fact]
         public void GetMostProductiveReviewersTest()
         {
-          
+            var ints = new List<int>();
+            ints.Add(3);
+            ints.Add(5);
             
+            _mockReviewRepository.Setup(o => o.FindMostProductiveReviewers())
+                .Returns(ints);
+            var mostProductiveReviewers = _reviewService.GetMostProductiveReviewers();
+
+            Assert.Equal(ints,mostProductiveReviewers);
+
         }
         
         /// <summary>
         /// 9. Test for the average grade. which movies is the top amount
         /// </summary>
         [Theory]
-        [InlineData(2.3,10)]
-        [InlineData(3.5,8)]
-        public void GetTopRatedMoviesTest(double grade,int amount)
+        [InlineData(10)]
+        [InlineData(8)]
+        public void GetTopRatedMoviesTest(int amount)
         {
-          
+            var ints = new List<int>();
+            _mockReviewRepository.Setup(o => o.GetTopRatedMovies(amount))
+                .Returns(ints);
+            Assert.Equal(ints,_reviewService.GetTopRatedMovies(amount));
         }
         
         /// <summary>
@@ -188,7 +222,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(232)]
         public void GetTopMoviesByReviewerTest(int reviewer)
         {
-            
+            var ints = new List<int>();
+            _mockReviewRepository.Setup(o => o.GetTopMoviesByReviewer(reviewer))
+                .Returns(ints);
+            Assert.Equal(ints,_reviewService.GetTopMoviesByReviewer(reviewer));
         }
 
         /// <summary>
@@ -199,7 +236,10 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(232)]
         public void GetReviewersByMovieTest(int movie)
         {
-         
+            var ints = new List<int>();
+            _mockReviewRepository.Setup(o => o.GetReviewerByMovie(movie))
+                .Returns(ints);
+            Assert.Equal(ints,_reviewService.GetReviewersByMovie(movie));
         }
     }
 }

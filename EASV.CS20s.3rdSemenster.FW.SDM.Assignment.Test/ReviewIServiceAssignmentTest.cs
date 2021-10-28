@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.IService;
+using EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Core.Models;
 using Moq;
 using Xunit;
 
@@ -99,9 +101,14 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [Fact]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
-            var movie = new int[]{1,2,3,4,5};
-            _mock.Setup(o => o.GetMoviesWithHighestNumberOfTopRates()).Returns(movie);
-            Assert.Equal(movie,_mock.Object.GetMoviesWithHighestNumberOfTopRates());
+            var ints = new List<int>();
+            ints.Add(1);
+            ints.Add(2);
+
+            int rate = 1;
+            
+            _mock.Setup(o => o.GetMoviesWithHighestNumberOfTopRates(rate)).Returns(ints);
+            Assert.Equal(ints,_mock.Object.GetMoviesWithHighestNumberOfTopRates(rate));
 
         }
         
@@ -111,9 +118,9 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [Fact]
         public void GetMostProductiveReviewersTest()
         {
-            int[] reviewer = {1,2,3,4,5};
-            _mock.Setup(o => o.GetMostProductiveReviewers()).Returns(reviewer);
-            Assert.Equal(reviewer,_mock.Object.GetMostProductiveReviewers());
+            var ints = new List<int>();
+            _mock.Setup(o => o.GetMostProductiveReviewers()).Returns(ints);
+            Assert.Equal(ints,_mock.Object.GetMostProductiveReviewers());
             
         }
         
@@ -121,12 +128,12 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         /// 9. Test for the average grade. which movies is the top amount
         /// </summary>
         [Theory]
-        [InlineData(2.3,10)]
-        [InlineData(3.5,8)]
-        public void GetTopRatedMoviesTest(double grade,int amount)
+        [InlineData(10)]
+        [InlineData(8)]
+        public void GetTopRatedMoviesTest(int amount)
         {
-            _mock.Setup(o => o.GetTopRatedMovies(grade)).Returns(amount);
-            Assert.Equal(amount,_mock.Object.GetTopRatedMovies(grade));
+            _mock.Setup(o => o.GetTopRatedMovies(amount)).Returns(new List<int>());
+            Assert.Equal(new List<int>(),_mock.Object.GetTopRatedMovies(amount));
         }
         
         /// <summary>
@@ -137,9 +144,8 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(232)]
         public void GetTopMoviesByReviewerTest(int reviewer)
         {
-            int[] movies = { 1, 2, 3, 4, 5 };
-            _mock.Setup(o => o.GetTopMoviesByReviewer(reviewer)).Returns(movies);
-            Assert.Equal(movies,_mock.Object.GetTopMoviesByReviewer(reviewer));
+            _mock.Setup(o => o.GetTopMoviesByReviewer(reviewer)).Returns(new List<int>());
+            Assert.Equal(new List<int>(),_mock.Object.GetTopMoviesByReviewer(reviewer));
         }
 
         /// <summary>
@@ -150,9 +156,8 @@ namespace EASV.CS20s._3rdSemenster.FW.SDM.Assignment.Test
         [InlineData(232)]
         public void GetReviewersByMovieTest(int movie)
         {
-            int[] reviewers = { 1, 2, 3, 4, 5 };
-            _mock.Setup(o => o.GetReviewersByMovie(movie)).Returns(reviewers);
-            Assert.Equal(reviewers,_mock.Object.GetReviewersByMovie(movie));
+            _mock.Setup(o => o.GetReviewersByMovie(movie)).Returns(new List<int>());
+            Assert.Equal(new List<int>(),_mock.Object.GetReviewersByMovie(movie));
         }
 
     }
